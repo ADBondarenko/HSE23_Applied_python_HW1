@@ -4,7 +4,10 @@ __pycache__/
 *$py.class
 #Database creation
 database/
+#Drafts
 BD_homework.ipynb
+#Secrets PSQL connection
+.streamlit/secrets.toml
 # C extensions
 *.so
 
