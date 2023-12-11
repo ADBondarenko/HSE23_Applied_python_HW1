@@ -1,7 +1,7 @@
 DROP TABLE if EXISTS D_merged;
 
 CREATE TABLE D_merged as (
-SELECT D_CLIENTS.*, 
+SELECT DISTINCT D_CLIENTS.*, 
 D_CLOSE_LOAN.closed_fl,
 D_JOB.gen_industry,
 D_JOB.gen_title,
@@ -14,11 +14,7 @@ D_LOAN.id_loan,
 D_SALARY.family_income,
 D_SALARY.personal_income,
 D_TARGET.agreement_rk,
-D_TARGET.target,
-D_WORK.flag as work_flag,
-D_WORK.comment as work_comment,
-D_PENS.flag as pens_flag,
-D_PENS.comment as pens_comment
+D_TARGET.target
 FROM D_CLIENTS
 LEFT JOIN D_LOAN ON 
 D_CLIENTS.ID = D_LOAN.ID_CLIENT
@@ -28,14 +24,26 @@ LEFT JOIN D_JOB ON
 D_CLIENTS.ID = D_JOB.ID_CLIENT
 LEFT JOIN D_CLOSE_LOAN ON
 D_LOAN.ID_LOAN::varchar = D_CLOSE_LOAN.ID_LOAN::varchar
-LEFT JOIN D_PENS ON
-D_CLIENTS.ID = D_PENS.ID
+
 LEFT JOIN D_SALARY ON
 D_CLIENTS.ID = D_SALARY.ID_CLIENT
 LEFT JOIN D_target ON
 D_CLIENTS.ID = D_target.ID_CLIENT
-LEFT JOIN D_WORK ON
-D_CLIENTS.ID = D_WORK.ID);
+);
+DROP TABLE if EXISTS D_calc;
+CREATE TABLE D_calc as 
+(select id, count(id_loan)as LOAN_NUM_TOTAL from D_merged group by id);
+CREATE TABLE D_calc_closed as 
+(select id, count(id_loan) as LOAN_NUM_CLOSED from D_merged where closed_fl::int = 1 
+group by id);
+DROP TABLE IF EXISTS D_MERGED_PROCESSED;
+CREATE TABLE D_merged_processed as 
+(SELECT D_merged.*, D_calc.LOAN_NUM_TOTAL,D_calc_closed.LOAN_NUM_CLOSED FROM 
+D_merged 
+LEFT JOIN D_calc ON 
+D_merged.ID = D_calc.id
+LEFT JOIN D_calc_closed ON 
+D_merged.ID = D_calc_closed.id);
 
 
 
