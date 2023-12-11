@@ -21,7 +21,7 @@ PRIMARY KEY (ID));
 CREATE TABLE D_close_loan(
 ID_LOAN SERIAL,
 CLOSED_FL VARCHAR(255)),
-PRIMARY KEY(ID_LOAN_SERIAL));
+PRIMARY KEY(ID_LOAN));
 \copy D_close_loan FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_close_loan.csv' DELIMITER ',' CSV HEADER;
 
 

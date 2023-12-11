@@ -1,0 +1,41 @@
+DROP TABLE if EXISTS D_merged;
+
+CREATE TABLE D_merged as (
+SELECT D_CLIENTS.*, 
+D_CLOSE_LOAN.closed_fl,
+D_JOB.gen_industry,
+D_JOB.gen_title,
+D_JOB.job_dir,
+D_JOB.work_time,
+D_LAST_CREDIT.credit,
+D_LAST_CREDIT.term,
+D_LAST_CREDIT.fst_payment,
+D_LOAN.id_loan,  
+D_SALARY.family_income,
+D_SALARY.personal_income,
+D_TARGET.agreement_rk,
+D_TARGET.target,
+D_WORK.flag as work_flag,
+D_WORK.comment as work_comment,
+D_PENS.flag as pens_flag,
+D_PENS.comment as pens_comment
+FROM D_CLIENTS
+LEFT JOIN D_LOAN ON 
+D_CLIENTS.ID = D_LOAN.ID_CLIENT
+LEFT JOIN D_LAST_CREDIT ON 
+D_CLIENTS.ID = D_LAST_CREDIT.ID_CLIENT
+LEFT JOIN D_JOB ON 
+D_CLIENTS.ID = D_JOB.ID_CLIENT
+LEFT JOIN D_CLOSE_LOAN ON
+D_LOAN.ID_LOAN::varchar = D_CLOSE_LOAN.ID_LOAN::varchar
+LEFT JOIN D_PENS ON
+D_CLIENTS.ID = D_PENS.ID
+LEFT JOIN D_SALARY ON
+D_CLIENTS.ID = D_SALARY.ID_CLIENT
+LEFT JOIN D_target ON
+D_CLIENTS.ID = D_target.ID_CLIENT
+LEFT JOIN D_WORK ON
+D_CLIENTS.ID = D_WORK.ID);
+
+
+
