@@ -1,0 +1,82 @@
+CREATE TABLE D_clients (
+ID SERIAL,
+AGE VARCHAR(255),
+GENDER VARCHAR(255),
+EDUCATION VARCHAR(255),
+MARITAL_STATUS VARCHAR(255),
+CHILD_TOTAL VARCHAR(255),
+DEPENDANTS VARCHAR(255),
+SOCSTATUS_WORK_FL VARCHAR(255),
+SOCSTATUS_PENS_FL VARCHAR(255),
+REG_ADDRESS_PROVINCE VARCHAR(255),
+FACT_ADDRESS_PROVINCE VARCHAR(255),
+POSTAL_ADDRESS_PROVINCE VARCHAR(255),
+FL_PRESENCE_FL VARCHAR(255),
+OWN_AUTO VARCHAR(255),
+PRIMARY KEY (ID));
+\copy d_clients FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_clients.csv' DELIMITER ',' CSV HEADER;
+
+#select * from d_clients limit 1;
+
+CREATE TABLE D_close_loan(
+ID_LOAN SERIAL,
+CLOSED_FL VARCHAR(255)),
+PRIMARY KEY(ID_LOAN_SERIAL));
+\copy D_close_loan FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_close_loan.csv' DELIMITER ',' CSV HEADER;
+
+
+CREATE TABLE D_job(
+GEN_INDUSTRY VARCHAR(255),
+GEN_TITLE VARCHAR(255),
+JOB_DIR VARCHAR(255),
+WORK_TIME VARCHAR(255),
+ID_CLIENT SERIAL,
+PRIMARY KEY(ID_CLIENT));
+
+\copy D_job FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_job.csv' DELIMITER ',' CSV HEADER;
+
+CREATE TABLE D_last_credit (
+CREDIT VARCHAR(255),
+TERM VARCHAR(255),
+FST_PAYMENT VARCHAR(255),
+ID_CLIENT SERIAL,
+PRIMARY KEY(ID_CLIENT));
+
+\copy D_last_credit FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_last_credit.csv' DELIMITER ',' CSV HEADER;
+
+CREATE TABLE D_loan(
+ID_LOAN VARCHAR(255),
+ID_CLIENT SERIAL);
+
+\copy D_loan FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_loan.csv' DELIMITER ',' CSV HEADER;
+
+CREATE TABLE D_PENS(ID SERIAL,
+FLAG VARCHAR(255),
+COMMENT VARCHAR(255),
+PRIMARY KEY(ID));
+
+\copy D_PENS FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_pens.csv' DELIMITER ',' CSV HEADER;
+
+CREATE TABLE D_salary(
+FAMILY_INCOME VARCHAR(255),
+PERSONAL_INCOME VARCHAR(255),
+ID_CLIENT SERIAL);
+
+\copy D_salary FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_salary.csv' DELIMITER ',' CSV HEADER;
+
+
+
+CREATE TABLE D_target(
+AGREEMENT_RK VARCHAR(255),
+ID_CLIENT SERIAL,
+TARGET VARCHAR(255));
+
+\copy D_target FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_target.csv' DELIMITER ',' CSV HEADER;
+
+CREATE TABLE D_work(
+ID SERIAL,
+FLAG VARCHAR(255),
+COMMENT VARCHAR(255),
+PRIMARY KEY(ID));
+
+\copy D_work FROM '/Users/ab/Documents/GitHub/stepik_linear_models/datasets/D_work.csv' DELIMITER ',' CSV HEADER;
