@@ -67,7 +67,7 @@ for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
         tab_col.subheader(f"Попарное распределение признака {col}")
         fig, ax = plt.subplots()
         ax.set_title(f"Попарное распределение признака {col} с таргетом")
-        df_full_pd[[col, "target"]].scatter(x = col, y = "target", c = "target", colormap = 'YlOrRd',
+        df_full_pd[[col, "target"]].plot.scatter(x = col, y = "target", c = "target", colormap = 'YlOrRd',
                                             ax = ax, legend = True)
         tab_col.pyplot(fig)
 
