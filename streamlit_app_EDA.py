@@ -50,10 +50,12 @@ for tab_col, col in zip(st.tabs(target_cols),target_cols):
         fig, ax = plt.subplots()
         ax.set_title(f"Гистограмма распределения признака {col}")
         df_full_pd[[col]].hist(ax = ax, legend = True)
+        
+        
         tab_col.pyplot(fig)
         
         
-
+#
 # for i in target_cols:
 # df_full = conn.query('SELECT * FROM D_merged_processed;', ttl="10m")
 # all_widgets = sp.create_widgets(df_full, create_data)
