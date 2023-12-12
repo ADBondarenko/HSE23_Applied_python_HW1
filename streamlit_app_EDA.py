@@ -46,8 +46,8 @@ for tab_col, col in zip(st.tabs(target_cols),target_cols):
     with tab_col:
         tab_col.subheader(f"Распределение признака {col}")
         fig, ax = plt.subplots()
-        ax.set_title(f"Гистограмма распределения признака {col}")\
-        df_full_pd[[col]].hist(bins = 20)
+        ax.set_title(f"Гистограмма распределения признака {col}")
+        df_full_pd[[col]].hist(ax = ax, bins = 20)
         tab_col.pyplot(fig)
         
         
