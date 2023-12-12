@@ -77,12 +77,13 @@ import streamlit as st
 
 median = st.toggle('Activate feature')
 
-options_list = ['Кол-во наблюдений', 'Среднее', 'СКВО', 'Мин.', '25% квантиль','50% квантиль' '75% квантиль', 'Максимум', 'Квантиль уровня X']
+options_list = ['Кол-во наблюдений', 'Среднее', 'СКВО', 'Мин.', '25% квантиль','50% квантиль','75% квантиль', 'Максимум', 'Квантиль уровня X']
 options_mask = ['count', 'mean', 'std', 'min', 'count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max']
+
 options = st.multiselect(
     'Какие статистики признаков Вам интересны?',
      options_list,
-    ['Grey', 'Green'])
+    ['Среднее', 'СКВО', '75% квантиль','Максимум'])
 
 options_dict = {i : j for i,j in zip(options_list[:-1], options_mask)}
 new_target_cols = ['age', 'gender', 'child_total',
@@ -91,6 +92,7 @@ options = st.multiselect(
     'Какие статистики признаков Вам интересны?',
      options_list,
     ['Grey', 'Green'])
+
 with options:
     for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
         with tab_col:
