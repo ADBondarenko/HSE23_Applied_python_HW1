@@ -104,7 +104,7 @@ for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
         if 'Квантиль уровня X' in options:
             key = np.random.randint(0,10000000)
             level = tab_col.slider(
-            key,
+            str(key),
             min_value = 0.0,
             max_value = 1.0,
             step = 0.05,                
