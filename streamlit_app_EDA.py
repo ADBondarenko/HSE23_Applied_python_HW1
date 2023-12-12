@@ -32,7 +32,7 @@ st.subheader('''В наличии должны быть колонки
 * построение матрицы корреляций
 * построение графиков зависимостей целевой переменной и признаков
 * вычисление числовых характеристик распределения числовых столбцов (среднее, min, max, медиана и так далее)''')
-engine_pd = create_engine(f"postgresql+pyscopg2://{st.secrets.username}:{st.secrets.password}@{st.secrets.host}/{st.secrets.database}")
+engine_pd = create_engine(f"postgresql+pyscopg2://{st.secrets.connections.postgresql.username}:{st.secrets.connections.postgresql.password}@{st.secrets.connections.postgresql.host}/{st.secrets.connections.postgresql.database}")
 df_full_pd = pd.read_sql('SELECT * FROM D_merged_processed;', engine_pd)
 
 # df_full = conn.query('SELECT * FROM D_merged_processed;', ttl="10m")
