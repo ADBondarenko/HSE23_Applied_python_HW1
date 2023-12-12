@@ -32,6 +32,6 @@ st.subheader('''В наличии должны быть колонки
 
 df_full = conn.query('SELECT * FROM D_merged_processed;', ttl="10m")
 
-df_full_pd = pd.read_sql(df_full)
+df_full_pd = pd.read_sql('SELECT * FROM D_merged_processed;', conn)
 df_full_pd_test = pd.DataFrame(df_full)
 
