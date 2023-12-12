@@ -37,17 +37,19 @@ engine_pd = create_engine(f"postgresql://{st.secrets.connections.postgresql.user
 df_full_pd = pd.read_sql('SELECT * FROM D_merged_processed;', engine_pd)
 st.subheader('''Построение графиков распределений признаков''')
 
-target_cols = ['age', 'gender', 'education', 'marital_status', 'child_total',
-       'dependants', 'socstatus_work_fl', 'socstatus_pens_fl',
-       'family_income', 'personal_income',
+target_cols = ['age', 'gender', 'child_total',
+       'dependants', 'socstatus_work_fl', 'socstatus_pens_fl', 'personal_income',
       'target', 'loan_num_total', 'loan_num_closed']
+
+type_dict = {i : 'float64' for i in target_cols}
+df_full_pd = df_full_pd.astype(type_dict)
 
 for tab_col, col in zip(st.tabs(target_cols),target_cols):
     with tab_col:
         tab_col.subheader(f"Распределение признака {col}")
         fig, ax = plt.subplots()
         ax.set_title(f"Гистограмма распределения признака {col}")
-        df_full_pd[[col]].hist(ax = ax, bins = 20)
+        df_full_pd[[i]].hist(ax = ax, legend = True)
         tab_col.pyplot(fig)
         
         
