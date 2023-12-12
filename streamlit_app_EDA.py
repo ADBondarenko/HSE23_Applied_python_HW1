@@ -46,7 +46,7 @@ for tab_col, col in zip(st.tabs(target_cols),target_cols):
     with tab_col:
         tab_col.subheader(f"Распределение признака {col}")
         
-        tab_col.bar_chart(df_full_pd[[target_col]])
+        tab_col.bar_chart(df_full_pd[[col]])
         
         
 
