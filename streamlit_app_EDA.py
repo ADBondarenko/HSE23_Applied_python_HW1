@@ -64,15 +64,13 @@ target_cols = target_cols.remove('target')
 for tab_col, col in zip(st.tabs(target_cols),target_cols):
     with tab_col:
         tab_col.subheader(f"Распределение признака {col}")
-        
-        plot_ = sns.pairplot(df_full_pd[[col, "target"]],
-                            diag_kind="kde",
-                            x_vars = col, 
-                            y_vars = 'target')
-        plt.set_title(f"Попарное распределение признака {col} с таргетом")
-        tab_col.pyplot(plot_.get_figure())
-        
+        fig, ax = plt.subplots()
+        ax.set_title(f"Попарное распределение признака {col} с таргетом")
+        df_full_pd[[col]].hist(by = 'target',ax = ax, legend = True)
+        tab_col.pyplot(fig)
 
+        
+st.subheader('''Вычисление числовых характеристик распределения числовых столбцов''') 
         
 #
 # for i in target_cols:
