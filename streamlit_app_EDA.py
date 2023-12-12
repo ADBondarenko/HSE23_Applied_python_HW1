@@ -49,7 +49,7 @@ for tab_col, col in zip(st.tabs(target_cols),target_cols):
         tab_col.subheader(f"Распределение признака {col}")
         fig, ax = plt.subplots()
         ax.set_title(f"Гистограмма распределения признака {col}")
-        df_full_pd[[i]].hist(ax = ax, legend = True)
+        df_full_pd[[col]].hist(ax = ax, legend = True)
         tab_col.pyplot(fig)
         
         
