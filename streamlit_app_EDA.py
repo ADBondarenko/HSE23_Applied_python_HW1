@@ -56,8 +56,8 @@ for tab_col, col in zip(st.tabs(target_cols),target_cols):
 st.subheader('''Построение матрицы корреляций''') 
 
 corr_matrix = df_full_pd[target_cols].corr()
-corr_plot = sns.heatmap(corr_matrix)
-st.pyplot(corr_plot.fig)
+corr_plot = sns.heatmap(corr_matrix, annot = True)
+st.pyplot(corr_plot.get_figure())
 
 st.subheader('''Попарное распределение фичей с таргетом''')
 for tab_col, col in zip(st.tabs(target_cols.remove('target')),target_cols.remove('target')):
@@ -69,7 +69,7 @@ for tab_col, col in zip(st.tabs(target_cols.remove('target')),target_cols.remove
                             x_vars = col, 
                             y_vars = 'target')
         plt.set_title(f"Попарное распределение признака {col} с таргетом")
-        tab_col.pyplot(plot_.fig)
+        tab_col.pyplot(plot_.get_figure())
         
 
         
