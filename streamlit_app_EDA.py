@@ -60,8 +60,8 @@ corr_plot = sns.heatmap(corr_matrix, annot = True)
 st.pyplot(corr_plot.get_figure())
 
 st.subheader('''Попарное распределение фичей с таргетом''')
-new_target_cols = target_cols.remove('target')
-st.write(new_target_cols)
+new_target_cols = ['age', 'gender', 'child_total',
+       'dependants', 'socstatus_work_fl', 'socstatus_pens_fl', 'personal_income', 'loan_num_total', 'loan_num_closed']
 for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
     with tab_col:
         tab_col.subheader(f"Попарное распределение признака {col}")
