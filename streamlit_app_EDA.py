@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd 
 import numpy as np
+import sqlalchemy
+import psycopg2
 import os
 
 conn = st.connection("postgresql", type="sql")
@@ -29,9 +31,12 @@ st.subheader('''В наличии должны быть колонки
 * построение матрицы корреляций
 * построение графиков зависимостей целевой переменной и признаков
 * вычисление числовых характеристик распределения числовых столбцов (среднее, min, max, медиана и так далее)''')
+engine_pd = create_engine(f"postgresql+pyscopg2://{st.secrets.username}:{st.secrets.password}@{st.secrets.host}/{st.secrets.database}")
+df_full_pd = pd.read_sql('SELECT * FROM D_merged_processed;', engine_pd)
 
-df_full = conn.query('SELECT * FROM D_merged_processed;', ttl="10m")
+# df_full = conn.query('SELECT * FROM D_merged_processed;', ttl="10m")
+# all_widgets = sp.create_widgets(df_full, create_data)
+# ignore_columns=["PassengerId"]
 
-df_full_pd = pd.read_sql('SELECT * FROM D_merged_processed;', conn)
-df_full_pd_test = pd.DataFrame(df_full)
+
 
