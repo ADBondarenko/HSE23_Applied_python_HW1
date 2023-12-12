@@ -71,7 +71,44 @@ for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
         tab_col.pyplot(fig)
 
         
-st.subheader('''Вычисление числовых характеристик распределения числовых столбцов''') 
+st.subheader('''Вычисление числовых характеристик распределения числовых столбцов, включая таргет''') 
+
+import streamlit as st
+
+median = st.toggle('Activate feature')
+
+options_list = ['Кол-во наблюдений', 'Среднее', 'СКВ', 'Мин.', '25% квантиль','50% квантиль' '75% квантиль', 'Максимум', 'Квантиль уровня X']
+options_mask = ['count', 'mean', 'std', 'min', 'count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max']
+options = st.multiselect(
+    'Какие статистики признаков Вам интересны?',
+     options_list,
+    ['Grey', 'Green'])
+
+options_dict = {i : j for i,j in zip(options_list[:-1], options_mask)}
+new_target_cols = ['age', 'gender', 'child_total',
+       'dependants', 'socstatus_work_fl', 'socstatus_pens_fl', 'personal_income', 'loan_num_total', 'loan_num_closed', 'target']
+options = st.multiselect(
+    'Какие статистики признаков Вам интересны?',
+     options_list,
+    ['Grey', 'Green'])
+with options:
+    for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
+        with tab_col:
+            options_selected = []
+            for option in options:
+                options_selected.append(options_dict[option])
+                tab_col.subheader(f"Статистики признака {col}")
+                tab_col.dataframe(df_full_pd[col].describe().loc[options_selected], use_container_width=True)
+                
+            if 'Квантиль уровня X' in options:
+                level = tab_col.slider(
+                "Задайте уровень квантиля",
+                min_value = 0.0,
+                max_value = 1.0,
+                step = 0.05,                
+                value=0.45,
+                tab_col.write("Start time:", np.quantile(df_full_pd[col].values, level))
+        
         
 #
 # for i in target_cols:
