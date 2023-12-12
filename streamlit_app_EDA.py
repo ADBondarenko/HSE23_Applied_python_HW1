@@ -4,7 +4,7 @@ import numpy as np
 import os
 
 conn = st.connection("postgresql", type="sql")
-df = conn.query('SELECT * FROM D_merged_processed limit 10;', ttl="Получившийся датафрейм из PostgreSQL БД")
+df = conn.query('SELECT * FROM D_merged_processed limit 10;', ttl="10m")
 
 # for row in df.itertuples():
 #     st.write(f"{row.id} has a :{row.loan_id}:")
