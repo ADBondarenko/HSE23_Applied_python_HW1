@@ -61,7 +61,7 @@ st.pyplot(corr_plot.get_figure())
 
 st.subheader('''Попарное распределение фичей с таргетом''')
 target_cols = target_cols.remove('target')
-for tab_col, col in zip(st.tabs(target_cols,target_cols)):
+for tab_col, col in zip(st.tabs(target_cols),target_cols):
     with tab_col:
         tab_col.subheader(f"Распределение признака {col}")
         
