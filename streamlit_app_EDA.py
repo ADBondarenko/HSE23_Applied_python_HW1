@@ -67,7 +67,7 @@ for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
         tab_col.subheader(f"Попарное распределение признака {col}")
         fig, ax = plt.subplots()
         ax.set_title(f"Попарное распределение признака {col} с таргетом")
-        df_full_pd[[col], "target"].hist(by = 'target',ax = ax, legend = True)
+        df_full_pd[col, "target"].hist(by = 'target',ax = ax, legend = True)
         tab_col.pyplot(fig)
 
         
@@ -106,15 +106,7 @@ with options:
                 min_value = 0.0,
                 max_value = 1.0,
                 step = 0.05,                
-                value=0.45,
-                tab_col.write("Start time:", np.quantile(df_full_pd[col].values, level))
-        
-        
-#
-# for i in target_cols:
-# df_full = conn.query('SELECT * FROM D_merged_processed;', ttl="10m")
-# all_widgets = sp.create_widgets(df_full, create_data)
-# ignore_columns=["PassengerId"]
-
-
+                value=0.45)
+                
+                tab_col.write("Квантиль уровня :", np.quantile(df_full_pd[col].values, level)
 
