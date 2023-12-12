@@ -55,7 +55,7 @@ for tab_col, col in zip(st.tabs(target_cols),target_cols):
         
 st.subheader('''Построение матрицы корреляций''') 
 
-corr_matrix = df_full_pd[[target_cols]].corr()
+corr_matrix = df_full_pd[list([target_cols])].corr()
 corr_plot = sns.heatmap(corr_matrix)
 st.pyplot(corr_plot)
 
