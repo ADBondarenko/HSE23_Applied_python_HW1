@@ -108,5 +108,5 @@ with options:
                 step = 0.05,                
                 value=0.45)
                 
-                tab_col.write("Квантиль уровня :", np.quantile(df_full_pd[col].values, level)
+                tab_col.write("Квантиль уровня :", np.quantile(df_full_pd[col].values, level))
 
