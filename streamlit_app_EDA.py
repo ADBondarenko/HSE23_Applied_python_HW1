@@ -67,7 +67,7 @@ for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
         tab_col.subheader(f"Попарное распределение признака {col}")
         fig, ax = plt.subplots()
         ax.set_title(f"Попарное распределение признака {col} с таргетом")
-        df_full_pd[[col, "target"]].plot.bar(x = col, y = "target",
+        df_full_pd[[col, "target"]].plot.hist(x = col, by = "target",
                                             ax = ax, legend = True)
         tab_col.pyplot(fig)
 
