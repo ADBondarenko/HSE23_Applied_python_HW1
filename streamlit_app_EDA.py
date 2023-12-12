@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd 
 import numpy as np
 import sqlalchemy
+import seaborn as sns
 from sqlalchemy import create_engine
 import psycopg2
 import os
@@ -50,10 +51,27 @@ for tab_col, col in zip(st.tabs(target_cols),target_cols):
         fig, ax = plt.subplots()
         ax.set_title(f"Гистограмма распределения признака {col}")
         df_full_pd[[col]].hist(ax = ax, legend = True)
-        
-        
         tab_col.pyplot(fig)
         
+st.subheader('''Построение матрицы корреляций''') 
+
+corr_matrix = df_full_pd[[target_cols]].corr()
+corr_plot = sns.heatmap(corr_matrix)
+st.pyplot(corr_plot)
+
+st.subheader('''Попарное распределение фичей с таргетом''')
+for tab_col, col in zip(st.tabs(target_cols.remove('target')),target_cols.remove('target')):
+    with tab_col:
+        tab_col.subheader(f"Распределение признака {col}")
+        
+        plot_ = sns.pairplot(df_full_pd[[col, "target"]],
+                            diag_kind="kde",
+                            x_vars = col, 
+                            y_vars = 'target')
+        plt.set_title(f"Попарное распределение признака {col} с таргетом")
+        tab_col.pyplot(plot_)
+        
+
         
 #
 # for i in target_cols:
