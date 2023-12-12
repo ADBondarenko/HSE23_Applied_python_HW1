@@ -67,7 +67,8 @@ for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
         tab_col.subheader(f"Попарное распределение признака {col}")
         fig, ax = plt.subplots()
         ax.set_title(f"Попарное распределение признака {col} с таргетом")
-        df_full_pd[[col, "target"]].hist(by = 'target',ax = ax, legend = True)
+        df_full_pd[[col, "target"]].scatter(x = col, y = "target", c = "target", colormap = 'YlOrRd',
+                                            ax = ax, legend = True)
         tab_col.pyplot(fig)
 
         
@@ -93,9 +94,12 @@ for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
     with tab_col:
         options_selected = []
         for option in options:
-            options_selected.append(options_dict[option])
-            tab_col.subheader(f"Статистики признака {col}")
-            tab_col.dataframe(df_full_pd[col].describe().loc[options_selected], use_container_width=True)
+            if option == 'Квантиль уровня X':
+                pass
+            else:
+                options_selected.append(options_dict[option])
+        tab_col.subheader(f"Статистики признака {col}")
+        tab_col.dataframe(df_full_pd[col].describe().loc[options_selected], use_container_width=True)
 
         if 'Квантиль уровня X' in options:
             level = tab_col.slider(
