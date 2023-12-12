@@ -107,8 +107,7 @@ for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
             str(key),
             min_value = 0.0,
             max_value = 1.0,
-            step = 0.05,                
-            value=0.45)
+            step = 0.05)
             quantile = np.quantile(df_full_pd[col].values, level)
             tab_col.write(f"Квантиль заданного уровня: {quantile}")
 
