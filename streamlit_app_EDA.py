@@ -102,8 +102,9 @@ for tab_col, col in zip(st.tabs(new_target_cols),new_target_cols):
         tab_col.dataframe(df_full_pd[col].describe().loc[options_selected], use_container_width=True)
 
         if 'Квантиль уровня X' in options:
+            key = np.random.randint(0,10000000)
             level = tab_col.slider(
-            "Задайте уровень квантиля",
+            key,
             min_value = 0.0,
             max_value = 1.0,
             step = 0.05,                
