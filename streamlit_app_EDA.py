@@ -45,8 +45,10 @@ target_cols = ['age', 'gender', 'education', 'marital_status', 'child_total',
 for tab_col, col in zip(st.tabs(target_cols),target_cols):
     with tab_col:
         tab_col.subheader(f"Распределение признака {col}")
-        
-        tab_col.bar_chart(df_full_pd[[col]])
+        fig, ax = plt.subplots()
+        ax.set_title(f"Гистограмма распределения признака {col}")\
+        df_full_pd[[col]].hist(bins = 20)
+        tab_col.pyplot(fig)
         
         
 
